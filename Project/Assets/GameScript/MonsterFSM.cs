@@ -14,7 +14,6 @@ public class MonsterFSM : ChickenHealth
 
     public EState currentState;
 
-    public GameObject player;
     public NavMeshAgent nvAgent;
     public int attackRange;
     public BoxCollider hitBox;
@@ -27,7 +26,7 @@ public class MonsterFSM : ChickenHealth
     void Start()
     {
         currentState = EState.Move;
-        _targetVec = player.transform.position;
+        _targetVec = GameManager.Instance.playerTransform.transform.position;
         _animator = GetComponent<Animator>();
         nvAgent = GetComponent<NavMeshAgent>();
         nvAgent.speed = moveSpeed;
@@ -39,7 +38,7 @@ public class MonsterFSM : ChickenHealth
         {
             case EState.Move:
                 {
-                    _targetVec = player.transform.position;
+                    _targetVec = GameManager.Instance.playerTransform.transform.position;
                     break;
                 }
             case EState.Attack:
@@ -53,7 +52,7 @@ public class MonsterFSM : ChickenHealth
         }
 
         nvAgent.SetDestination(_targetVec);
-        float distance = Vector3.Distance(transform.position, player.transform.position);
+        float distance = Vector3.Distance(transform.position, GameManager.Instance.playerTransform.transform.position);
         
             
         if (distance < attackRange && _canAttack)

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class EXP : MonoBehaviour
 {
-
     private Transform _playerTransform;
     // Start is called before the first frame update
     void Start()
@@ -25,7 +24,8 @@ public class EXP : MonoBehaviour
                 {
                     GetComponent<CapsuleCollider>().enabled = false;
                 }
-                transform.position = Vector3.Lerp(transform.position, _playerTransform.transform.position, 0.2f);
+                
+                transform.position = Vector3.Lerp(transform.position, _playerTransform.Find("Hip").transform.position, 0.1f);
                 yield return null;
             }
         }

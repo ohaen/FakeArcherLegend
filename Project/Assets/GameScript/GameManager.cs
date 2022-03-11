@@ -40,6 +40,8 @@ public class GameManager : MonoBehaviour
     public List<GameObject> Mosnters;
     public List<Transform> StageList;
 
+    public GameObject slotmachin;
+
 
     public int clearStageCount = 0;
     public int currentStageNumber = 0;

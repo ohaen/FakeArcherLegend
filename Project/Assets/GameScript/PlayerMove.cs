@@ -4,18 +4,19 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    //public float MoveSpeed = 5f;
 
     
     private Rigidbody _playerRigidbody;
     private Animator _playerAnimator;
     private PlayerInput _playerInput;
+    private PlayerInfomation _playerInfomation;
 
     private Vector3 _moveVec;
 
 
     void Start()
     {
+        _playerInfomation = GetComponent<PlayerInfomation>();
         _playerRigidbody = GetComponent<Rigidbody>();
         _playerAnimator = GetComponent<Animator>();
         _playerInput = GetComponent<PlayerInput>();
@@ -29,7 +30,7 @@ public class PlayerMove : MonoBehaviour
         _playerAnimator.SetBool("Run", _moveVec != Vector3.zero);
         
         
-        _playerRigidbody.velocity = MoveVec() * gameObject.GetComponent<LivingEntity>().moveSpeed;
+        _playerRigidbody.velocity = MoveVec() * (_playerInfomation.moveSpeed + ((_playerInfomation.moveSpeed * 0.1f) * _playerInfomation.moveSpeedUpCount));
         
     }
     public Vector3 MoveVec()

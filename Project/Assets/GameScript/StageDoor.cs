@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class StageDoor : MonoBehaviour
 {
-    void Start()
-    {
+    //void Start()
+    //{
         
-    }
+    //}
 
-    void Update()
-    {
+    //void Update()
+    //{
 
-    }
+    //}
 
     private void OnTriggerEnter(Collider other)
     {
@@ -20,7 +20,9 @@ public class StageDoor : MonoBehaviour
         {
             ++GameManager.Instance.currentStageNumber;
 
-            GameManager.Instance.StageList[GameManager.Instance.currentStageNumber].parent.GetChild(3).gameObject.SetActive(true);
+            GameManager.Instance.StageList[GameManager.Instance.currentStageNumber].parent.Find("MonsterSearch").gameObject.SetActive(true);
+            GameManager.Instance.StageList[GameManager.Instance.currentStageNumber].parent.Find("Monster").gameObject.SetActive(true);
+            //GameManager.Instance.StageList[GameManager.Instance.currentStageNumber].parent.GetChild(3).gameObject.SetActive(true);
             other.transform.position = GameManager.Instance.StageList[GameManager.Instance.currentStageNumber].transform.position;
             GameManager.Instance.UpdateCam();
         }

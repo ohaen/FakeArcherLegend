@@ -34,18 +34,20 @@ public class AutoFire : MonoBehaviour
     }
     void MakeBull()
     {
-        _playerAnimator.SetFloat("AttackSpeed", gameObject.GetComponent<LivingEntity>().attackSpeed);
+        float playerDamage = _playerInformation.CalcDamage();
+        float playerAttackSpeed = _playerInformation.attackSpeed + (_playerInformation.attackSpeedUpCount * 0.1f);
+        _playerAnimator.SetFloat("AttackSpeed", playerAttackSpeed);
         if (_playerInformation.twinAttack)
         {
             _temp = Instantiate(attackBullet, TwinBulletPosition1.transform.position, transform.rotation);
-            _temp.GetComponent<Bullet>().damage = _playerInformation.damage;
+            _temp.GetComponent<Bullet>().damage = playerDamage;
             _temp = Instantiate(attackBullet, TwinBulletPosition2.transform.position, transform.rotation);
-            _temp.GetComponent<Bullet>().damage = _playerInformation.damage;
+            _temp.GetComponent<Bullet>().damage = playerDamage;
         }
         else
         {
             _temp = Instantiate(attackBullet, bulletPosition.transform.position, transform.rotation);
-            _temp.GetComponent<Bullet>().damage = _playerInformation.damage;
+            _temp.GetComponent<Bullet>().damage = playerDamage;
         }
     }
 }
