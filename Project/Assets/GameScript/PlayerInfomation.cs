@@ -24,21 +24,30 @@ public class PlayerInfomation : LivingEntity
         UpdateCurrentEXP();
     }
 
-    private void OnTriggerEnter(Collider other)
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.CompareTag("EXP"))
+    //    {
+    //        ++currentEXP;
+    //        if (needEXP <= currentEXP)
+    //        {
+    //            LevelUp();
+    //        }
+    //        UpdateCurrentEXP();
+    //        Destroy(other.transform.parent.gameObject);
+    //    }
+    //}
+
+
+    public void TakeEXP(float EXP)
     {
-        if (other.CompareTag("EXP"))
+        ++currentEXP;
+        if (needEXP <= currentEXP)
         {
-            ++currentEXP;
-            if (needEXP <= currentEXP)
-            {
-                LevelUp();
-            }
-            UpdateCurrentEXP();
-            Destroy(other.transform.parent.gameObject);
+            LevelUp();
         }
+        UpdateCurrentEXP();
     }
-
-
     //// Update is called once per frame
     //void Update()
     //{

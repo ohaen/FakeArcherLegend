@@ -176,7 +176,6 @@ GameObject:
   - component: {fileID: 9029353257479009470}
   - component: {fileID: 9029353258118338530}
   - component: {fileID: 9029353258118338531}
-  - component: {fileID: 5939122016445180860}
   m_Layer: 6
   m_Name: Potato
   m_TagString: EXP
@@ -250,18 +249,6 @@ CapsuleCollider:
   m_Height: 0.39
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5939122016445180860
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9029353257471575934}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3de7f42bf036d14e9e7c2dba14f1872, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &9029353258041540469
 GameObject:
   m_ObjectHideFlags: 0
@@ -272,6 +259,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9029353258041540470}
   - component: {fileID: 9029353258041540471}
+  - component: {fileID: 671982923565286135}
   m_Layer: 0
   m_Name: EXP
   m_TagString: EXP
@@ -307,3 +295,15 @@ CapsuleCollider:
   m_Height: 0.43
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &671982923565286135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9029353258041540469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3de7f42bf036d14e9e7c2dba14f1872, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
