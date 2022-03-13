@@ -42,6 +42,11 @@ public class GameManager : MonoBehaviour
 
     public GameObject slotmachin;
 
+    public GameObject EXPUI;
+    public GameObject BossHPUI;
+
+    public Canvas EndGameCanvas;
+
 
     public int clearStageCount = 0;
     public int currentStageNumber = 0;
@@ -60,5 +65,12 @@ public class GameManager : MonoBehaviour
     public void UpdateCam()
     {
         playerCam.GetComponent<FollowCam>().MoveStage();
+    }
+
+    public void EndGame()
+    {
+        Time.timeScale = 0f;
+        EXPUI.SetActive(false);
+        EndGameCanvas.gameObject.SetActive(true);
     }
 }

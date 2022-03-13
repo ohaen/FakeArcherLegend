@@ -78,9 +78,11 @@ public class MonsterFSM : ChickenHealth
             yield return null;
         }
         gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        gameObject.transform.Find("HitBox").gameObject.SetActive(true);
+        hitBox.gameObject.SetActive(true);
+        //gameObject.transform.Find("HitBox").gameObject.SetActive(true);
         yield return new WaitForSeconds(0.1f);
-        gameObject.transform.Find("HitBox").gameObject.SetActive(false);
+        hitBox.gameObject.SetActive(false);
+        //gameObject.transform.Find("HitBox").gameObject.SetActive(false);
         _animator.SetBool("Attack", false);
         yield return new WaitForSeconds(1f);
         _canAttack = true;

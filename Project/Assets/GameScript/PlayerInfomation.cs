@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerInfomation : LivingEntity
 {
+    private Animator _playerAnimator;
     public Slider EXPBar;
     public Text _levelText;
     public bool doubleAttack;
@@ -19,6 +20,7 @@ public class PlayerInfomation : LivingEntity
 
     void Start()
     {
+        _playerAnimator = GetComponent<Animator>();
         _levelText.text = ($"LV {level}");
         UpdateNeedEXP();
         UpdateCurrentEXP();
@@ -84,6 +86,15 @@ public class PlayerInfomation : LivingEntity
 
     public override void Die()
     {
+        GetComponent<PlayerTargeting>().enabled = false;
+        GetComponent<PlayerInput>().enabled = false;
+        _playerAnimator.SetBool("Attack", false);
+        _playerAnimator.SetBool("Die", true);
+        Invoke("GameOverEvent", 1.5f);
         base.Die();
+    }
+    void GameOverEvent()
+    {
+        GameManager.Instance.EndGame();
     }
 }

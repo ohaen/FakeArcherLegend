@@ -19,7 +19,11 @@ public class StageDoor : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             ++GameManager.Instance.currentStageNumber;
-
+            if (GameManager.Instance.currentStageNumber >= 6)
+            {
+                GameManager.Instance.EXPUI.gameObject.SetActive(false);
+                GameManager.Instance.BossHPUI.gameObject.SetActive(true);
+            }
             GameManager.Instance.StageList[GameManager.Instance.currentStageNumber].parent.Find("MonsterSearch").gameObject.SetActive(true);
             GameManager.Instance.StageList[GameManager.Instance.currentStageNumber].parent.Find("Monster").gameObject.SetActive(true);
             //GameManager.Instance.StageList[GameManager.Instance.currentStageNumber].parent.GetChild(3).gameObject.SetActive(true);
