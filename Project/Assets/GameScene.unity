@@ -8523,7 +8523,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 1000
   currentHP: 1000
-  damage: 30
+  damage: 35
   moveSpeed: 1
   attackSpeed: 1
   attackDelay: 3
@@ -9522,9 +9522,9 @@ MonoBehaviour:
   attackDelay: 1
   EXPBar: {fileID: 17848742}
   _levelText: {fileID: 1082027142}
-  doubleAttack: 1
-  twinAttack: 1
-  sideAttack: 1
+  doubleAttack: 0
+  twinAttack: 0
+  sideAttack: 0
   damageUpCount: 0
   attackSpeedUpCount: 0
   moveSpeedUpCount: 0
