@@ -10,5 +10,6 @@ public class LoadMainScene : MonoBehaviour
     public void ChangeMainScene()
     {
         EditorSceneManager.LoadScene(1);
+        Time.timeScale = 1.0f;
     }
 }

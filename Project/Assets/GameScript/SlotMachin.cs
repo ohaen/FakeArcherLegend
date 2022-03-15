@@ -63,6 +63,10 @@ public class SlotMachin : MonoBehaviour
                 ++playerInfomation.moveSpeedUpCount;
                 break;
             case 5:
+                playerInfomation.MaxHpUp();
+                break;
+            case 6:
+                playerInfomation.sideAttack = true;
                 break;
         }
         transform.parent.gameObject.SetActive(false);
@@ -82,6 +86,10 @@ public class SlotMachin : MonoBehaviour
         if (skillNum == 1)
         {
             return playerInfomation.twinAttack;
+        }
+        if (skillNum == 6)
+        {
+            return playerInfomation.sideAttack;
         }
 
         return false;

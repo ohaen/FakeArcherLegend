@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class Bullet : BullBase
 {
-    public float speed;
-    public float damage;
+
     private Rigidbody _rigidbody;
 
     void Start()
@@ -15,17 +14,19 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject, 5f);
     }
 
-    private void OnTriggerEnter(Collider other)
+
+
+    private void OnCollisionEnter(Collision collision)
     {
-        if(other.CompareTag("Wall"))
+        if (collision.gameObject.CompareTag("Wall"))
         {
             _rigidbody.velocity = Vector3.zero;
-            Destroy(gameObject, 1f);
+            Destroy(gameObject);
         }
-        else if (other.CompareTag("Monster"))
+        else if (collision.gameObject.CompareTag("Monster"))
         {
             _rigidbody.velocity = Vector3.zero;
-            other.GetComponent<LivingEntity>().TakeDamage(damage);
+            collision.gameObject.GetComponent<LivingEntity>().TakeDamage(damage);
             Destroy(gameObject);
         }
     }

@@ -10,9 +10,11 @@ public class PlayerInfomation : LivingEntity
     public Text _levelText;
     public bool doubleAttack;
     public bool twinAttack;
+    public bool sideAttack;
     public int damageUpCount;
     public int attackSpeedUpCount;
     public int moveSpeedUpCount;
+    public int selectWeapon;
 
     public float level;
     public float needEXP;
@@ -26,20 +28,6 @@ public class PlayerInfomation : LivingEntity
         UpdateCurrentEXP();
     }
 
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.CompareTag("EXP"))
-    //    {
-    //        ++currentEXP;
-    //        if (needEXP <= currentEXP)
-    //        {
-    //            LevelUp();
-    //        }
-    //        UpdateCurrentEXP();
-    //        Destroy(other.transform.parent.gameObject);
-    //    }
-    //}
-
 
     public void TakeEXP(float EXP)
     {
@@ -51,10 +39,7 @@ public class PlayerInfomation : LivingEntity
         UpdateCurrentEXP();
     }
     //// Update is called once per frame
-    //void Update()
-    //{
 
-    //}
 
     void LevelUp()
     {
@@ -73,6 +58,11 @@ public class PlayerInfomation : LivingEntity
     void UpdateCurrentEXP()
     {
         EXPBar.value = currentEXP;
+    }
+    public void MaxHpUp()
+    {
+        maxHP *= 1.3f;
+        currentHP = maxHP;
     }
     public float CalcDamage()
     {
