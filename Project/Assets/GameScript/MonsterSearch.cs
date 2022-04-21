@@ -8,14 +8,9 @@ public class MonsterSearch : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
-        {
-            Debug.Log("플레이어 충돌");
-        }
         if (other.CompareTag("Monster"))
         {
             GameManager.Instance.Mosnters.Add(other.gameObject);
-            Debug.Log("몬스터 충돌");
         }
     }
 }

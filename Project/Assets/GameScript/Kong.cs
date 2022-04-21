@@ -5,25 +5,15 @@ using UnityEngine;
 public class Kong : MonoBehaviour
 {
     private Transform _playerTransform;
-    private Vector3 _startPos;
-    private Vector3 _targetVec;
-    public float height = 5000.0f;
-    public float ms;
     public float damage;
-    private Vector3 center;
-    private Vector3 middleCenter;
+
+    public float h = 5;
+    public float gravity = -18;
 
     void Start()
     {
         _playerTransform = GameManager.Instance.playerTransform;
-        _startPos = this.transform.position;
-        _targetVec = _playerTransform.position;
-        //Destroy(gameObject, 1f);
-        //center = (_startPos + _targetVec) / 3;
-        //center = new Vector3(center.x, center.y + 5.0f, center.z);
-        center = new Vector3(_targetVec.x, _targetVec.y + 5.0f, _targetVec.z);
-        Destroy(gameObject, 3f);
-        Debug.Log("»ý¼ºµÊ");
+        Launch();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -35,21 +25,30 @@ public class Kong : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        ms += Time.deltaTime;
-
-        //transform.position = Vector3.Lerp(transform.position, _targetVec, ms);
-        if (ms < 1f)
+        if (gameObject.transform.position.y < -0.5f)
         {
-            transform.position = Vector3.Lerp(transform.position, center, ms / 50.0f);
-        }
-        else
-        {
-            transform.position = Vector3.Lerp(transform.position, _targetVec, ms / 100.0f);
+            Destroy(gameObject);
         }
     }
 
+    void Launch()
+    {
+        Physics.gravity = Vector3.up * gravity;
+        gameObject.GetComponent<Rigidbody>().useGravity = true;
+        gameObject.GetComponent<Rigidbody>().velocity = CalculateLaunchVelocity();
+    }
+
+    Vector3 CalculateLaunchVelocity()
+    {
+        float displacementY = _playerTransform.position.y - gameObject.transform.position.y;
+        Vector3 displacementXZ = new Vector3(_playerTransform.position.x - gameObject.transform.position.x, 0, _playerTransform.position.z - gameObject.transform.position.z);
+
+        Vector3 velocityY = Vector3.up * Mathf.Sqrt(-2 * gravity * h);
+        Vector3 velocityXZ = displacementXZ / (Mathf.Sqrt(-2 * h / gravity) + Mathf.Sqrt(2 * (displacementY - h) / gravity));
+
+        return velocityXZ + velocityY;
+    }
 
 }

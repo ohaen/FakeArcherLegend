@@ -24,7 +24,6 @@ public class PlayerTargeting : MonoBehaviour
     {
         if (GameManager.Instance.Mosnters.Count >= 1 && false == (_playerAnimator.GetBool("Run")))
         {
-            //Debug.Log("·è¿§ µé¾î¿È");
             SetLookAt();
         }
         else

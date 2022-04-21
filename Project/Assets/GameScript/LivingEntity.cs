@@ -24,6 +24,6 @@ public class LivingEntity : MonoBehaviour, HealthBase
 
     public virtual void Die()
     {
-        Debug.Log("╬саж╠щ");
+
     }
 }

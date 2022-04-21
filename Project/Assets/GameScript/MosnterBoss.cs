@@ -55,7 +55,6 @@ public class MosnterBoss : LivingEntity
         GameManager.Instance.EndGame();
     }
 
-    // Update is called once per frame
     void Update()
     {
         _distance = Vector3.Distance(gameObject.transform.position, _targetPlayer.transform.position);
@@ -81,7 +80,6 @@ public class MosnterBoss : LivingEntity
         {
             _lastAttackTime = Time.time;
             _canAttack = false;
-            //int attackNum = 1;
             int attackNum;
             if (_distance > 2.0f)
             {
@@ -116,7 +114,6 @@ public class MosnterBoss : LivingEntity
 
     IEnumerator MeleeAttack()
     {
-        //bool whileloop = true;
         _canAttack = false;
         nvAgent.speed = 0f;
         _animator.SetBool("Attack", true);
@@ -157,6 +154,5 @@ public class MosnterBoss : LivingEntity
     public void SetActiveHitBox()
     {
         hitBox.GetComponent<HitBox>().ActiveHitBox();
-        //hitBox.gameObject.SetActive(true);
     }
 }

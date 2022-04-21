@@ -109,10 +109,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 849e3b708f292d14087e2328c2ee7d63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetPos: {fileID: 0}
-  flyTime: 1
-  startTime: 0
-  height: 1
+  damage: 0
+  h: 3
+  gravity: -18
 --- !u!54 &2244811566978079735
 Rigidbody:
   m_ObjectHideFlags: 0

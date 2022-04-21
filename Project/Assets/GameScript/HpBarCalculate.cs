@@ -9,13 +9,12 @@ public class HpBarCalculate : MonoBehaviour
     public Text HPText;
     public GameObject calHPObject;
     private LivingEntity HPObject;
-    // Start is called before the first frame update
+
     void Start()
     {
         HPObject = calHPObject.GetComponent<LivingEntity>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         slider.maxValue = HPObject.maxHP;

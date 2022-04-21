@@ -38,7 +38,6 @@ public class PlayerInfomation : LivingEntity
         }
         UpdateCurrentEXP();
     }
-    //// Update is called once per frame
 
 
     void LevelUp()
