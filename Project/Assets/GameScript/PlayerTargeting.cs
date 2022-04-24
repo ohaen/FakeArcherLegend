@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class PlayerTargeting : MonoBehaviour
 {
-    public GameObject player;
     private PlayerMove _playerMove;
     private Animator _playerAnimator;
     private AutoFire _playerAutoFire;
 
+    private Collider[] _monsters = new Collider[15];
 
+    public int sphereRadiusForSight = 100;
     public List<GameObject> stageMonsterList;
 
     private RaycastHit hit;
@@ -24,6 +25,7 @@ public class PlayerTargeting : MonoBehaviour
     {
         if (GameManager.Instance.Mosnters.Count >= 1 && false == (_playerAnimator.GetBool("Run")))
         {
+            Debug.Log("타게팅 들어옴");
             SetLookAt();
         }
         else
@@ -32,45 +34,96 @@ public class PlayerTargeting : MonoBehaviour
         }
     }
 
+    //private readonly int _monsterLayerMask = (1 << LayerMask.NameToLayer("Monster"));
+    //private readonly int _wallLayerMask = (1 << LayerMask.NameToLayer("Wall"));
     private void SetLookAt()
     {
-        float _aprochMonsterDistance = 100000f;
-        bool _findMonster = false;
+        int _monsterLayerMask = (1 << LayerMask.NameToLayer("Monster"));        //tem
+        int _wallLayerMask = (1 << LayerMask.NameToLayer("Wall"));              //tem
+        Transform target = null;
+        float nearestDistance = 100000f;
+        bool isTargetBehindWall = false;
 
-        for (int i = 0; i < GameManager.Instance.Mosnters.Count; ++i)
+        int collapsedMonsterCount = Physics.OverlapSphereNonAlloc(transform.position,
+            sphereRadiusForSight, _monsters, _monsterLayerMask);
+        for (int i = 0; i < collapsedMonsterCount; ++i)
         {
-            float distance = Vector3.Distance(player.transform.position, GameManager.Instance.Mosnters[i].transform.position);
-
-            Physics.Raycast(player.transform.position, GameManager.Instance.Mosnters[i].transform.position - player.transform.position, out hit, distance);
-
-            if (hit.collider.tag == "Monster")
+            Vector3 distanceVector = _monsters[i].transform.position - transform.position;
+            float sqrDistance = distanceVector.sqrMagnitude;
+            bool isBehindWall = Physics.Raycast(transform.position, distanceVector, sqrDistance, _wallLayerMask);
+            Debug.DrawRay(transform.position, distanceVector, Color.red);
+            if (target == null)
             {
-                Debug.DrawRay(player.transform.position,
-                GameManager.Instance.Mosnters[i].transform.position - player.transform.position,
-                Color.green);
-                if (_aprochMonsterDistance > distance)
-                {
-                    _aprochMonsterDistance = distance;
-                    transform.LookAt(GameManager.Instance.Mosnters[i].transform.position);
-                }
-                _findMonster = true;
-            }
+                target = _monsters[i].transform;
+                nearestDistance = sqrDistance;
+                isTargetBehindWall = isBehindWall;
 
-            if (_findMonster == false)
+                continue;
+            }
+            if (nearestDistance <= sqrDistance)
             {
-                Debug.DrawRay(player.transform.position,
-                GameManager.Instance.Mosnters[i].transform.position - player.transform.position,
-                Color.red);
-                if (_aprochMonsterDistance > distance)
+                if (isTargetBehindWall)
                 {
-                    _aprochMonsterDistance = distance;
-                    transform.LookAt(GameManager.Instance.Mosnters[i].transform.position);
+                    target = _monsters[i].transform;
+                    nearestDistance = sqrDistance;
+                    isTargetBehindWall = isBehindWall;
                 }
+                continue;
             }
-
-            _playerAnimator.SetBool("Attack", true);
+            if (isBehindWall)
+            {
+                continue;
+            }
+            target = _monsters[i].transform;
+            nearestDistance = sqrDistance;
+            isTargetBehindWall = isBehindWall;
         }
+        transform.LookAt(target);
+
+
+        //}
+        //foreach (var monster in _monsters)
+        //{
+        //    float distance = Vector3.Distance(transform.position, monster.transform.position);
+        //    Physics.Raycast(transform.position, monster.transform.position - transform.position, out hit, distance);
+        //    if (hit.collider.tag == "Monster")
+        //    {
+        //        nearMonster = CalculateNearMonster(monster, ref _nearstMonsterDistance, distance);
+        //    }
+        //    else
+        //    {
+        //        invisibleNearMonster = CalculateNearMonster(monster, ref _invisibleNearstMonsterDistance, distance);
+        //    }
+        //}
+
+
+        //if (nearMonster != null)
+        //{
+        //    transform.LookAt(nearMonster.transform.position);
+        //}
+        //else if (invisibleNearMonster != null)
+        //{
+        //    transform.LookAt(invisibleNearMonster.transform.position);
+        //}
+
+        _playerAnimator.SetBool("Attack", true);
     }
 
-    
+    GameObject CalculateNearMonster(Collider targetMonster, ref float nearstMonsterDistance, float distance)
+    {
+        Debug.DrawRay(transform.position,
+        targetMonster.transform.position - transform.position,
+        Color.red);
+
+        if (nearstMonsterDistance > distance)
+        {
+            nearstMonsterDistance = distance;
+
+            return targetMonster.gameObject;
+        }
+        else
+        {
+            return null;
+        }
+    }
 }

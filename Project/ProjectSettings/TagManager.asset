@@ -13,13 +13,13 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - wall
+  - Wall
   - Water
   - UI
   - EXP
   - PlayerBullet
   - Player
-  - 
+  - Monster
   - 
   - 
   - 

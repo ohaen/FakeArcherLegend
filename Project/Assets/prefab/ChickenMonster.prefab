@@ -622,6 +622,10 @@ PrefabInstance:
       value: Toon Chicken
       objectReference: {fileID: 0}
     - target: {fileID: 9047896588361180230, guid: 66cfca72ef25a4149a6fe267c3a0880e, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 9047896588361180230, guid: 66cfca72ef25a4149a6fe267c3a0880e, type: 3}
       propertyPath: m_TagString
       value: Monster
       objectReference: {fileID: 0}
@@ -723,30 +727,6 @@ CapsuleCollider:
   m_Height: 0.6
   m_Direction: 1
   m_Center: {x: 0, y: 0.2, z: 0}
---- !u!114 &3375740900742101843
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6001500002847365632}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 825267da363e9b44395f2aae4bde63ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHP: 100
-  currentHP: 100
-  damage: 30
-  moveSpeed: 1.5
-  attackSpeed: 1
-  attackDelay: 1
-  EXP: {fileID: 9029353257471575934, guid: 3c56adafad5d42a4b8bab80389f5f663, type: 3}
-  currentState: 0
-  player: {fileID: 0}
-  nvAgent: {fileID: 3375740900742101840}
-  attackRange: 2
-  hitBox: {fileID: 3375740901159267052}
 --- !u!195 &3375740900742101840
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -769,3 +749,26 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &3375740900742101843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6001500002847365632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 825267da363e9b44395f2aae4bde63ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 100
+  currentHP: 100
+  damage: 30
+  moveSpeed: 1.5
+  attackSpeed: 1
+  attackDelay: 1
+  EXP: {fileID: 9029353257471575934, guid: 3c56adafad5d42a4b8bab80389f5f663, type: 3}
+  currentState: 0
+  nvAgent: {fileID: 3375740900742101840}
+  attackRange: 2
+  hitBox: {fileID: 3375740901159267052}

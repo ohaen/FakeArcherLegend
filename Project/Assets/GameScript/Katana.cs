@@ -22,11 +22,7 @@ public class Katana : BullBase
         {
             if (boundCount > 0)
             {
-                Vector3 incommingVec = transform.position - startPos;
-                Vector3 reflectVec = Vector3.Reflect(incommingVec, collision.contacts[0].normal);
-                startPos = transform.position;
-                _rigidbody.velocity = reflectVec.normalized * speed;
-                transform.forward = reflectVec.normalized;
+                ReflectedObject(collision);
                 --boundCount;
             }
             else
@@ -37,9 +33,23 @@ public class Katana : BullBase
         }
         else if (collision.gameObject.CompareTag("Monster"))
         {
-            _rigidbody.velocity = Vector3.zero;
-            collision.gameObject.GetComponent<LivingEntity>().TakeDamage(damage);
-            Destroy(gameObject);
+            OnCollisionMonster(collision);
         }
+    }
+
+    private void OnCollisionMonster(Collision collision)
+    {
+        _rigidbody.velocity = Vector3.zero;
+        collision.gameObject.GetComponent<LivingEntity>().TakeDamage(damage);
+        Destroy(gameObject);
+    }
+
+    private void ReflectedObject(Collision collision)
+    {
+        Vector3 incommingVec = transform.position - startPos;
+        Vector3 reflectVec = Vector3.Reflect(incommingVec, collision.contacts[0].normal);
+        startPos = transform.position;
+        _rigidbody.velocity = reflectVec.normalized * speed;
+        transform.forward = reflectVec.normalized;
     }
 }
